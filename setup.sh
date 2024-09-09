@@ -5,8 +5,6 @@ RED='\033[31m'
 YELLOW='\033[33m'
 GREEN='\033[32m'
 
-PACKAGE_MANAGERS="apt pacman dnf"
-PM=""
 
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -72,7 +70,16 @@ install_font() {
 }
 
 install_dependencies() {
+    PACKAGE_MANAGERS="apt pacman dnf"
+    PM=""
     dependencies="bash fastfetch wget unzip neovim lsd"
+
+    for pm in $PACKAGE_MANAGERS; do
+        if command_exists "$pm"; then
+            PM="$pm"
+            break
+        fi
+    done
     
     case $PM in
         apt)
@@ -102,12 +109,6 @@ link_config_files() {
     ln -s "$(pwd)/starship.toml" "$HOME/.config/starship.toml"
 }
 
-for pm in $PACKAGE_MANAGERS; do
-    if command_exists "$pm"; then
-        PM="$pm"
-        break
-    fi
-done
 
 install_dependencies
 install_starship
@@ -115,4 +116,6 @@ install_fzf
 install_zoxide
 install_font
 link_config_files
+
+echo "${YELLOW}Remember that if you have problems with icons dont showing up or any other problem with prompt please change your terminal default font to MesloLGLDZ Nerd Font${RS}"
 
