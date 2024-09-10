@@ -4,6 +4,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# Run fastfetch if it is installed
 [ -f "/usr/bin/fastfetch" ] && fastfetch
 
 # Add bin folder to PATH
@@ -89,7 +90,7 @@ extract() {
 	done
 }
 
-
+### KEYBINDS ###
 bind '"\C-f":"zi\n"'
 
 if command -v fzf &> /dev/null; then

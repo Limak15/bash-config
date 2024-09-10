@@ -116,6 +116,3 @@ install_fzf
 install_zoxide
 install_font
 link_config_files
-
-echo "${YELLOW}Remember that if you have problems with icons dont showing up or any other problem with prompt please change your terminal default font to MesloLGLDZ Nerd Font${RS}"
-
